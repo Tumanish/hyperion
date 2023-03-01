@@ -1,0 +1,7 @@
+ существует несколько сценариев:
+
+let ip_adress = (req.headers['x-forwarded-for'] || '').split(',').pop() ||
+req.headers["x-real-ip"] ||
+req.connection.remoteAddress ||
+req.socket.remoteAddress ||
+req.connection.socket.remoteAddress

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico?v=1.1">
+	<title>CodeCave</title>
+	<style>
+		* {
+			font-family: "Open sans", sans-serif
+		}
+
+		body {
+			width: 100%;
+			height: 100%;
+			padding: 0px;
+			margin: 0px;
+			font-size: 14px;
+			color: #637d83;
+			background: #013a33;
+		}
+
+		.card-login {
+			box-sizing: border-box;
+			background: white;
+			width: 380px;
+			height: 300px;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			margin: auto;
+			padding: 15px;
+		}
+
+		.card-title {
+			/*text-transform: uppercase;*/
+			margin-bottom: 25px;
+			color: #077e17;
+		}
+
+		.title {
+			text-align: center;
+			margin: 0px 0px 10px;
+			padding-bottom: 10px;
+			border-bottom: 3px solid #eeeeee;
+			text-transform: uppercase;
+			font-weight: 200;
+			font-size: 24px;
+			font-family: sans-serif;
+		}
+
+		.card-input {
+			width: 80%;
+			margin-left: 10%;
+			margin-bottom: 25px;
+		}
+
+		input {
+			height: 40px;
+			width: calc(100% - 45px);
+			border: 1px solid #bbb;
+			padding: 0 0 0 45px;
+			font-size: 14px;
+		}
+
+		.card-button {
+			margin-bottom: 25px;
+		}
+
+		button {
+			height: 40px;
+			width: 80%;
+			margin-left: 10%;
+			background: #138808;
+			border: none;
+			border: 2px solid #013a33;
+			color: white;
+			font-size: 18px;
+			font-weight: 200;
+			cursor: pointer;
+		}
+
+		button:disabled,
+		button[disabled] {
+			border: 1px solid #999999;
+			background-color: #cccccc;
+			color: #666666;
+		}
+
+		button:hover {
+			color: #ffffff;
+		}
+
+		.card-error {
+			text-align: center;
+			background: red;
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+		<div class="card-login">
+			<div class="card-title">
+				<h1 class="title">sign in</h1>
+			</div>
+			<div class="card-input">
+				<input formControlName="email" type="text" placeholder="E-mail">
+			</div>
+			<div class="card-input">
+				<input formControlName="password" type="password" placeholder="Password" value=1234>
+			</div>
+			<div class="card-button">
+				<button type="submit">authorization</button>
+			</div>
+		</div>
+	</form>
+	<script>
+
+	</script>
+</body>
+
+</html>
