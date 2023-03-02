@@ -22,7 +22,6 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-// mongoose.set('strictQuery', false) //предупреждение перед версией 7.0.0 mongoose
 mongoose.connect(keys.mongoURI).then(() => console.log("MongoDB connected", keys.mongoURI)).catch(error => console.log(error))
 
 app.use(passport.initialize())
@@ -30,20 +29,18 @@ passportFunction(passport)
 
 app.use(logs.logsAPI);
 
-app.get("/", function (request, response) {response.sendFile(__dirname + "/assets/html/loginPage.html")});
+app.get("/", function (request, response) { response.sendFile(__dirname + "/assets/html/loginPage.html") });
 
 app.use('/photos', express.static(`assets/img`));// Статическая папка
 
 app.use("/redirect", function (request, response) { response.redirect("https://metanit.com") }); // переадресация
 
-// http://localhost:3000/api/authorisation/login
-// http://localhost:3000/api/authorisation/register
-// http://localhost:3000/api/authorisation/test
 app.use('/api/authorisation', authorisationRoutes);
-//токен суется в заголовок ключ Authorization 
-//Bearer eyJhbG...X31rD2ru_xwwhX8
+//токен в заголовок ключ Authorization Bearer eyJhbG...X31rD2ru_xwwhX8
 
-// app.get('/api/test', (req, res) => { res.status(200).json({ messge: " It's alive!" }) }) // test api
+const sendInvite = require('./services/newUserInvate/sendMail')
+let link = "ya.ru"
+// sendInvite.sendMail('email@blablabla', link)
+
 module.exports = app;
-
 // send(). В качестве параметра может принимать объект Buffer, строку, в том числе с html-кодом, объект javascript или массив.

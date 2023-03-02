@@ -23,7 +23,7 @@ const userInfoShema = new Schema({
 	wasInvited:{
 		type: String
 	},
-	invaite:{
+	invaiteList:{
 		type: [String],
 		default: undefined
 	  }
@@ -31,4 +31,4 @@ const userInfoShema = new Schema({
 
 module.exports = mongoose.model('usersInfo', userInfoShema)
 
-//Поменять
+// TO DO // идентификатор	// имя пользователя	// роль	// выданные токены время генерации токена и т.д.	// дата регистрации	// инвайты и т. д. в юзер инфо.

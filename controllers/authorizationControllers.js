@@ -1,12 +1,10 @@
 const bcrypt = require('bcryptjs')
 const jsonwebtoken = require('jsonwebtoken')
+const tokenDecodeModule = require('../services/tokenDecode')
 
 const keys = require('../configuration/keys')
 const User = require('../models/User')
 
-// Универсальный обработчик ошиборк... типа errorHandler...
-
-// TO DO Сохранить логи, таймера(проверка/отзыв токена)... 
 exports.login = async function (request, response) {
 	console.log(request.body)
 	const candidate = await User.findOne({ email: request.body.email })
@@ -24,14 +22,14 @@ exports.login = async function (request, response) {
 	} else {
 		response.status(404).json({ message: "Invalid User / password, try again" })
 	}
-
-	// TO DO // идентификатор	// имя пользователя	// роль	// время генерации токена и т.д.	// дата регистрации	// инвайты и т. д. в юзер инфо.
 }
 
 exports.register = async function (request, response) {
-	//////// Свободная регистрация  TO DO регистрация инвайт токен id роль
-	console.log(request.body);
+	//TO DO регистрация по инвайту 
+
+	const tokenObj = tokenDecodeModule.tokenDecode(request.headers.authorization);
 	const candidate = await User.findOne({ email: request.body.email })
+
 	if (candidate) {
 		response.status(409).json({ message: 'error invalid email, try another one' })
 	} else {
@@ -43,13 +41,13 @@ exports.register = async function (request, response) {
 		})
 		try {
 			await user.save()
+			console.log("new User:", request.body.email, "Registered by:", tokenObj.email);
 			response.status(201).json({
 				message: "created new user",
-				user: user
+				user: user.email
 			})
 		} catch (error) {
-			console.log(error);
-			console.log("Ошибка сохранения в базу");
+			console.log(error, "Ошибка сохранения в базу");
 			// errorHandler(response, error)
 		}
 	}
@@ -65,5 +63,5 @@ exports.delete = function (request, response) {
 }
 
 exports.test = function (request, response) {
-	response.status(200).json({"message":"test"});
+	response.status(200).json({ "message": "test" });
 }
