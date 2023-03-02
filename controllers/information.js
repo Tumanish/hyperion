@@ -1,12 +1,14 @@
-exports.userInfo = function (request, response) {
-	// TO DO
-	// текущий	таймер токена. (на стороне клиента)
-	// запрос в базу, цепочка инвайтов от юзера ()
-	// вся цепочка для админа
+
+
+
+exports.userInfo = (request, response) => {
+	console.log(request.body);
+
+
 	response.send("login");
 }
 
-exports.text = function(request, response) {
+exports.text = function (request, response) {
 	response.send("text");
 }
 

@@ -2,13 +2,16 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const userInfoShema = new Schema({
+	id:{
+		type: String
+	},
 	name:{
 		type: String
 	},
 	login:{
 		type: String
 	},
-	passwordHash:{
+	email:{
 		type: String
 	},
 	status:{

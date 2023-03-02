@@ -12,6 +12,7 @@ const keys = require('./configuration/keys')// адресс MongoDB , salt for j
 const authorisationRoutes = require('./routes/authorizationRoutes')
 const passportFunction = require('./services/passport')
 const logs = require('./services/logs')
+const sendInvite = require('./services/newUserInvate/sendMail') // TO DO 
 
 const app = express();
 
@@ -30,17 +31,12 @@ passportFunction(passport)
 app.use(logs.logsAPI);
 
 app.get("/", function (request, response) { response.sendFile(__dirname + "/assets/html/loginPage.html") });
-
 app.use('/photos', express.static(`assets/img`));// Статическая папка
-
 app.use("/redirect", function (request, response) { response.redirect("https://metanit.com") }); // переадресация
+app.use('/api/authorisation', authorisationRoutes); //токен в заголовок ключ Authorization Bearer eyJhbG...X31rD2ru_xwwhX8
 
-app.use('/api/authorisation', authorisationRoutes);
-//токен в заголовок ключ Authorization Bearer eyJhbG...X31rD2ru_xwwhX8
+// sendInvite.sendMail(keys.M15Hemail)
 
-const sendInvite = require('./services/newUserInvate/sendMail')
-let link = "ya.ru"
-// sendInvite.sendMail('email@blablabla', link)
 
 module.exports = app;
 // send(). В качестве параметра может принимать объект Buffer, строку, в том числе с html-кодом, объект javascript или массив.
